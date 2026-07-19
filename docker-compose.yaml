@@ -4,7 +4,7 @@ services:
   # 1. PostgreSQL Database
   db:
     image: postgres:16-alpine
-    container_name: incidenthub_db
+    container_name: incidenthub-db
     ports:
       - "5432:5432"
     environment:
@@ -24,7 +24,7 @@ services:
     build:
       context: ./backend # Path to your backend directory containing its Dockerfile
       dockerfile: Dockerfile
-    container_name: incidenthub_backend
+    container_name: incidenthub-backend
     ports:
       - "5000:5000"
     environment:
@@ -38,9 +38,9 @@ services:
     build:
       context: ./frontend # Path to your frontend directory containing its Dockerfile
       dockerfile: Dockerfile
-    container_name: incidenthub_frontend
+    container_name: incidenthub-frontend
     ports:
-      - "80:80"
+      - "5173:80"
     depends_on:
       - backend
 
