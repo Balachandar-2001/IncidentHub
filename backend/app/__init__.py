@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 
 from app.config.database import db
 from app.routes.auth import auth_bp
+from app.routes.dashboard import dashboard_bp
 
 load_dotenv()
 
@@ -33,6 +34,11 @@ def create_app():
         incident_bp,
         url_prefix="/api/incidents"
     )
+
+    app.register_blueprint(
+    dashboard_bp,
+    url_prefix="/api/dashboard"
+)
 
     @app.route("/health")
     def health():

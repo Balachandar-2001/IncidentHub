@@ -1,0 +1,25 @@
+.dashboard{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.dashboard h1{
+
+    margin-bottom:30px;
+
+    color:#111827;
+
+}
+
+.summary-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:20px;
+
+}

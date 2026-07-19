@@ -1,0 +1,83 @@
+.modal-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.4);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+.modal {
+
+    background: white;
+
+    width: 400px;
+
+    padding: 25px;
+
+    border-radius: 10px;
+
+}
+
+.modal h2 {
+
+    margin-bottom: 15px;
+
+}
+
+.modal p {
+
+    margin-bottom: 10px;
+
+}
+
+.modal-actions {
+
+    margin-top: 20px;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+}
+
+.delete-btn {
+
+    background: crimson;
+
+    color: white;
+
+    border: none;
+
+    padding: 10px 18px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+}
+
+.cancel-btn {
+
+    background: gray;
+
+    color: white;
+
+    border: none;
+
+    padding: 10px 18px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+}

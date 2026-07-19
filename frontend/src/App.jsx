@@ -1,5 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
+import Layout from "./components/layout/Layout";
+
 import Login from "./pages/Login/Login";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import IncidentList from "./pages/Incidents/IncidentList";
@@ -9,25 +11,64 @@ import IncidentDetails from "./pages/Incidents/IncidentDetails";
 import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<Navigate to="/login" replace />} />
+    return (
+        <Routes>
 
-      <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Navigate to="/login" replace />} />
 
-      <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/login" element={<Login />} />
 
-      <Route path="/incidents" element={<IncidentList />} />
+            {/* Protected Layout */}
 
-      <Route path="/incidents/new" element={<IncidentCreate />} />
+            <Route
+                path="/dashboard"
+                element={
+                    <Layout>
+                        <Dashboard />
+                    </Layout>
+                }
+            />
 
-      <Route path="/incidents/:id" element={<IncidentDetails />} />
+            <Route
+                path="/incidents"
+                element={
+                    <Layout>
+                        <IncidentList />
+                    </Layout>
+                }
+            />
 
-      <Route path="/incidents/:id/edit" element={<IncidentEdit />} />
+            <Route
+                path="/incidents/new"
+                element={
+                    <Layout>
+                        <IncidentCreate />
+                    </Layout>
+                }
+            />
 
-      <Route path="*" element={<NotFound />} />
-    </Routes>
-  );
+            <Route
+                path="/incidents/:id"
+                element={
+                    <Layout>
+                        <IncidentDetails />
+                    </Layout>
+                }
+            />
+
+            <Route
+                path="/incidents/:id/edit"
+                element={
+                    <Layout>
+                        <IncidentEdit />
+                    </Layout>
+                }
+            />
+
+            <Route path="*" element={<NotFound />} />
+
+        </Routes>
+    );
 }
 
 export default App;

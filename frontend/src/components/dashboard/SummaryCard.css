@@ -1,0 +1,57 @@
+.summary-card{
+
+    background:white;
+
+    border-radius:10px;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+    display:flex;
+
+    overflow:hidden;
+
+    transition:.25s;
+
+    cursor:pointer;
+
+}
+
+.summary-card:hover{
+
+    transform:translateY(-4px);
+
+}
+
+.summary-strip{
+
+    width:8px;
+
+}
+
+.summary-content{
+
+    padding:20px;
+
+    flex:1;
+
+}
+
+.summary-content h3{
+
+    margin:0;
+
+    color:#6b7280;
+
+    font-size:16px;
+
+}
+
+.summary-content h1{
+
+    margin-top:15px;
+
+    font-size:34px;
+
+    color:#111827;
+
+}

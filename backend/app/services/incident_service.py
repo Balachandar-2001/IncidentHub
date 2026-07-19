@@ -116,3 +116,89 @@ def get_incident_by_id(incident_id):
             "updated_at": incident.updated_at.isoformat()
         }
     }, 200
+
+def update_incident(incident_id, data):
+
+    incident = Incident.query.get(incident_id)
+
+    if incident is None:
+        return {
+            "success": False,
+            "message": "Incident not found"
+        }, 404
+
+    title = data.get("title")
+    description = data.get("description")
+    severity = data.get("severity")
+    category = data.get("category")
+    status = data.get("status")
+    reported_by = data.get("reported_by")
+
+    if not title:
+        return {
+            "success": False,
+            "message": "Title is required"
+        }, 400
+
+    if not description:
+        return {
+            "success": False,
+            "message": "Description is required"
+        }, 400
+
+    if severity not in VALID_SEVERITIES:
+        return {
+            "success": False,
+            "message": "Invalid severity"
+        }, 400
+
+    VALID_STATUS = [
+        "OPEN",
+        "IN_PROGRESS",
+        "RESOLVED",
+        "CLOSED"
+    ]
+
+    if status not in VALID_STATUS:
+        return {
+            "success": False,
+            "message": "Invalid status"
+        }, 400
+
+    incident.title = title
+    incident.description = description
+    incident.severity = severity
+    incident.category = category
+    incident.status = status
+    incident.reported_by = reported_by
+
+    db.session.commit()
+
+    return {
+        "success": True,
+        "message": "Incident updated successfully",
+        "incident": {
+            "id": incident.id,
+            "title": incident.title,
+            "severity": incident.severity,
+            "status": incident.status
+        }
+    }, 200
+
+def delete_incident(incident_id):
+
+    incident = Incident.query.get(incident_id)
+
+    if incident is None:
+        return {
+            "success": False,
+            "message": "Incident not found"
+        }, 404
+
+    db.session.delete(incident)
+    db.session.commit()
+
+    return {
+        "success": True,
+        "message": "Incident deleted successfully"
+    }, 200
