@@ -1,0 +1,48 @@
+name: incident-hub
+
+services:
+  # 1. PostgreSQL Database
+  db:
+    image: postgres:16-alpine
+    container_name: incidenthub_db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: incidenthub
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d incidenthub"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # 2. Python Backend
+  backend:
+    build:
+      context: ./backend # Path to your backend directory containing its Dockerfile
+      dockerfile: Dockerfile
+    container_name: incidenthub_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/incidenthub
+    depends_on:
+      db:
+        condition: service_healthy # Wait until the DB is fully ready to accept connections
+
+  # 3. React Frontend (Served via Nginx)
+  frontend:
+    build:
+      context: ./frontend # Path to your frontend directory containing its Dockerfile
+      dockerfile: Dockerfile
+    container_name: incidenthub_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata: # Persists your database data on your local host machinery
