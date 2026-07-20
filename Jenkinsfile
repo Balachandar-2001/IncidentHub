@@ -24,6 +24,12 @@ pipeline
             }
         }
 
+        stage('Remove the existing images'){
+            steps{
+                sh 'docker rmi -f $(docker images -aq)'
+            }
+        }
+
         stage('Run the docker compose'){
             steps{
                 sh 'docker compose build'
