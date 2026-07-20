@@ -7,7 +7,6 @@ pipeline
         IMAGE_FRONTEND_NAME="30balachandar333/incident-hub-frontend"
         IMAGE_BACKEND_NAME="30balachandar333/incident-hub-backend"
         IMAGE_DB_NAME="30balachandar333/incident-hub-db"
-        BUILD_NUMBER="${env.BUILD_NUMBER}"
     }
 
     stages{
