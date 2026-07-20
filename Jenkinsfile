@@ -25,7 +25,7 @@ pipeline
             }
         }
 
-        stage('Print the docker images'){
+        stage('Print docker images'){
             steps{
                 sh 'docker images'
             }
