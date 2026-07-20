@@ -25,6 +25,7 @@ services:
       context: ./backend # Path to your backend directory containing its Dockerfile
       dockerfile: Dockerfile
     container_name: incidenthub-backend
+    image: incidenthub-backend:${BUILD_TAG}
     ports:
       - "5000:5000"
     environment:
@@ -39,6 +40,7 @@ services:
       context: ./frontend # Path to your frontend directory containing its Dockerfile
       dockerfile: Dockerfile
     container_name: incidenthub-frontend
+    image: incidenthub-frontend:${BUILD_TAG}
     ports:
       - "5173:80"
     depends_on:
